@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Digital Guardian — Informatika Kelas IX</title>
+<style>
+:root{--blue:#174d91;--blue2:#d9efff;--pink:#ff5d9e;--pink2:#ffe0ec;--yellow:#ffd85b;--yellow2:#fff4c4;--green:#2b9b62;--green2:#dcf8e6;--ink:#17324d;--muted:#5f7184;--paper:#fff;--line:#dce7f0;--shadow:0 12px 32px #16436c12}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#eef8ff,#fff3f8 50%,#fffbe5);min-height:100vh}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:13px;padding:11px 16px;font-weight:750;transition:.15s}button:hover{transform:translateY(-1px);filter:brightness(.98)}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #3289df;outline-offset:2px}
+.primary{background:var(--blue);color:#fff}.pinkbtn{background:var(--pink);color:white}.greenbtn{background:var(--green);color:white}.yellowbtn{background:var(--yellow);color:#493700}.secondary{background:#edf4fa;color:var(--blue);border:1px solid var(--line)}.danger{background:#ffe5e5;color:#a52132}
+.wrap{max-width:1100px;margin:auto;padding:20px}.hero{background:linear-gradient(120deg,#174d91,#247fbd);color:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"🛡️";font-size:100px;position:absolute;right:22px;top:10px;opacity:.22}.eyebrow{font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.75rem;color:#ffdf6a}.hero h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.05;margin:8px 0}.hero p{max-width:690px;margin-bottom:0;color:#e6f5ff}
+.layout{display:grid;grid-template-columns:260px 1fr;gap:18px;margin-top:18px}.panel,.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}.side h2{margin:0 0 12px;font-size:1.1rem}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.stat{background:#f4f9fd;border-radius:13px;padding:12px}.stat strong{display:block;font-size:1.4rem;color:var(--blue)}.stat span{font-size:.78rem;color:var(--muted)}.levelnav{display:grid;gap:8px;margin-top:15px}.levelnav button{text-align:left;background:#f5f8fb;color:var(--ink);border:1px solid transparent;padding:11px}.levelnav button.active{background:var(--blue2);border-color:#8cc9f2;color:#124c88}.levelnav button.done{background:var(--green2)}.levelnav small{display:block;font-weight:500;color:var(--muted);margin-top:2px}
+.content{min-width:0}.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:var(--yellow2);font-size:.82rem;font-weight:800}.progress{height:10px;border-radius:99px;background:#eaf0f5;overflow:hidden;margin:12px 0 18px}.progress div{height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--yellow),var(--green));transition:width .25s}.screen{display:none}.screen.active{display:block}.section-title{margin:0 0 8px;font-size:1.55rem}.muted{color:var(--muted)}.field{display:grid;gap:6px;margin:12px 0}.field label{font-weight:750;font-size:.92rem}.field input,.field textarea,.field select{width:100%;padding:12px;border:1px solid #cbd9e5;border-radius:12px;background:#fff;color:var(--ink)}.field textarea{min-height:90px;resize:vertical}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.welcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.feature{padding:14px;border-radius:15px}.feature:nth-child(1){background:var(--yellow2)}.feature:nth-child(2){background:var(--pink2)}.feature:nth-child(3){background:var(--green2)}.feature b{display:block;margin:5px 0}.question{border:1px solid var(--line);border-radius:17px;padding:18px;margin:14px 0;background:#fff}.qmeta{font-size:.8rem;color:var(--muted);font-weight:750}.qtext{font-size:1.1rem;font-weight:800;margin:10px 0 14px}.answers{display:grid;gap:9px}.answer{display:flex;gap:10px;align-items:flex-start;text-align:left;background:#f7fafc;border:1px solid #dce7f0;color:var(--ink);padding:12px;border-radius:12px;font-weight:600}.answer .letter{flex:0 0 27px;height:27px;border-radius:8px;display:grid;place-items:center;background:var(--blue2);color:var(--blue);font-weight:900}.answer.selected{border-color:var(--blue);background:#e9f5ff}.answer.correct{border-color:var(--green);background:var(--green2)}.answer.wrong{border-color:#f06477;background:#fff0f1}.feedback{padding:12px 14px;border-radius:12px;margin-top:12px;background:#f0f7ff;border-left:4px solid var(--blue)}.feedback.good{background:var(--green2);border-color:var(--green)}.feedback.bad{background:#fff0f1;border-color:#e34c63}.actions{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:18px}.actions .right{display:flex;gap:8px;flex-wrap:wrap}.notice{padding:12px;border-radius:12px;background:var(--yellow2);font-size:.9rem}.hidden{display:none!important}.badgebox{display:flex;gap:12px;align-items:center;background:linear-gradient(120deg,var(--yellow2),var(--pink2));padding:18px;border-radius:18px}.badgeicon{font-size:2.5rem}.resultgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.result{padding:14px;border-radius:14px;background:#f5f9fc}.result strong{font-size:1.4rem;display:block}.footer{text-align:center;color:var(--muted);font-size:.85rem;padding:22px}.small{font-size:.82rem}.checkline{display:flex;gap:8px;align-items:flex-start;margin:10px 0}.checkline input{margin-top:5px}.status{font-size:.88rem;padding:10px 12px;border-radius:10px;background:#eef6ff;color:#1a5389;word-break:break-word}.status.ok{background:var(--green2);color:#17633b}.status.err{background:#fff0f1;color:#a52132}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.side{order:2}.content{order:1}.levelnav{grid-template-columns:repeat(2,1fr)}.welcome-grid,.resultgrid{grid-template-columns:1fr}.hero:after{font-size:65px;right:8px}.wrap{padding:12px}.hero{padding:22px 18px}.two{grid-template-columns:1fr}}
+.lkpd-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92rem}.lkpd-table th,.lkpd-table td{border:1px solid #cbd9e5;padding:9px;text-align:left;vertical-align:top}.lkpd-table th{background:#eaf5ff}.lkpd-table textarea{width:100%;min-width:100px;min-height:75px;border:1px solid #cbd9e5;border-radius:8px;padding:8px;font:inherit;resize:vertical}.lkpd-activity{border:1px solid var(--line);border-radius:16px;padding:16px;margin:16px 0;background:#fff}.lkpd-activity h3{margin-top:0}.lkpd-question{padding:12px;border-radius:12px;background:#f6faff;margin:10px 0}.lkpd-question label{display:block;font-weight:750;margin-bottom:6px}.lkpd-question textarea{width:100%;min-height:85px;border:1px solid #cbd9e5;border-radius:10px;padding:10px;font:inherit}.lkpd-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+@media print{
+  @page{size:A4;margin:15mm}
+  body{background:#fff!important;color:#111!important}
+  body *{visibility:hidden!important}
+  #screen-lkpd.active,#screen-lkpd.active *{visibility:visible!important}
+  #screen-lkpd.active{display:block!important;position:absolute!important;left:0!important;top:0!important;width:100%!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important}
+  #screen-lkpd .lkpd-actions,#screen-lkpd .no-print{display:none!important}
+  #screen-lkpd .field input,#screen-lkpd textarea{border:1px solid #777!important;color:#111!important;background:#fff!important}
+  #screen-lkpd .lkpd-activity{break-inside:avoid;border:1px solid #777;box-shadow:none}
+  #screen-lkpd .lkpd-table th{background:#eee!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">Informatika • Kelas IX • Bab IV</div>
+  <h1>🛡️ Digital Guardian</h1>
+  <p>Misi menjaga dunia digital: berpikir sebelum berbagi, berempati saat berinteraksi, dan melindungi data pribadi. Selesaikan enam level bersama timmu!</p>
+</header>
+
+<div class="layout">
+<aside class="panel side">
+  <h2>📍 Peta Misi</h2>
+  <div class="stats">
+    <div class="stat"><strong id="sideScore">0</strong><span>Total poin</span></div>
+    <div class="stat"><strong id="sideDone">0/6</strong><span>Level selesai</span></div>
+  </div>
+  <div class="progress"><div id="overallBar"></div></div>
+  <nav class="levelnav" id="levelNav">
+    <button data-screen="intro" class="active">🏠 Beranda <small>Persiapan tim</small></button>
+    <button data-screen="lkpd">📘 LKPD <small>Lembar kerja peserta didik</small></button>
+    <button data-level="0">🔎 Level 1 <small>Detektif Perilaku</small></button>
+    <button data-level="1">💥 Level 2 <small>Dampak Digital</small></button>
+    <button data-level="2">💗 Level 3 <small>Empati Digital</small></button>
+    <button data-level="3">🧘 Level 4 <small>Mindfulness</small></button>
+    <button data-level="4">🔐 Level 5 <small>Pelindung Data</small></button>
+    <button data-level="5">🌱 Level 6 <small>Refleksi Diri</small></button>
+    <button data-screen="results">🏆 Evaluasi Akhir <small>Hasil tim</small></button>
+    <button data-screen="settings">⚙️ Pengaturan <small>Google Sheets</small></button>
+  </nav>
+  <p class="small muted">Tip: diskusikan jawaban bersama anggota kelompok sebelum memilih.</p>
+</aside>
+
+<main class="content">
+<section id="screen-intro" class="screen active card">
+  <span class="pill">🎮 Misi dimulai di sini</span>
+  <h2 class="section-title">Selamat datang, Guardian!</h2>
+  <p class="muted">Isi identitas kelompok, lalu jalankan enam misi. Setiap soal memiliki umpan balik dan pembahasan. Jawaban dinilai untuk pembelajaran, bukan untuk menghakimi kebiasaan pribadi.</p>
+  <details style="margin:14px 0;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#f8fbff">
+    <summary style="font-weight:800;cursor:pointer">Lihat enam tujuan pembelajaran</summary>
+    <ol>
+      <li>Mengidentifikasi perilaku positif dan negatif dalam berinteraksi di dunia digital.</li>
+      <li>Menjelaskan dampak perilaku digital, seperti cyberbullying, oversharing, kecanduan digital, dan penyebaran hoaks.</li>
+      <li>Menganalisis perilaku digital berdasarkan prinsip toleransi, empati, dan tanggung jawab.</li>
+      <li>Menerapkan prinsip mindfulness sebelum membuat, membagikan, atau menanggapi konten digital.</li>
+      <li>Menentukan langkah-langkah untuk melindungi data pribadi dan identitas digital.</li>
+      <li>Mengevaluasi perilaku diri sendiri dalam menggunakan teknologi digital serta merumuskan tindakan untuk membangun kebiasaan digital yang aman dan bijak.</li>
+    </ol>
+  </details>
+  <div class="two">
+    <div class="field"><label for="teamName">Nama kelompok *</label><input id="teamName" placeholder="Contoh: Tim Cyber Cerdas" maxlength="80"></div>
+    <div class="field"><label for="className">Kelas *</label><input id="className" placeholder="Contoh: IX-A" maxlength="30"></div>
+  </div>
+  <div class="field"><label for="members">Nama anggota (pisahkan dengan koma)</label><input id="members" placeholder="Alya, Bima, Citra" maxlength="300"></div>
+  <div class="welcome-grid">
+    <div class="feature">🧠<b>Berpikir kritis</b><span class="small">Analisis situasi nyata di dunia digital.</span></div>
+    <div class="feature">💬<b>Diskusi tim</b><span class="small">Dengarkan pendapat dan ambil keputusan bersama.</span></div>
+    <div class="feature">🛡️<b>Jadi pelindung</b><span class="small">Pilih tindakan yang aman dan bertanggung jawab.</span></div>
+  </div>
+  <div class="notice">Aturan: jangan masukkan kata sandi, nomor identitas, alamat rumah, atau data pribadi sensitif ke dalam game.</div>
+  <div class="actions"><span></span><button class="primary" id="startBtn">Mulai Misi 1 →</button></div>
+</section>
+
+<section id="screen-lkpd" class="screen card">
+  <span class="pill">📘 Lembar Kerja Peserta Didik</span>
+  <h2 class="section-title">LKPD: Etika, Empati, dan Keamanan Digital</h2>
+  <p class="muted">Mata Pelajaran: Informatika • Kelas IX SMP/MTs • Media: Digital Guardian</p>
+  <div class="notice no-print">Isi LKPD ini berdasarkan diskusi dan kegiatan pada Digital Guardian. Jawaban disimpan di browser perangkat ini dan tidak dikirim ke internet secara otomatis.</div>
+  <h3>Identitas Peserta Didik</h3>
+  <div class="two">
+    <div class="field"><label for="lkpdName">Nama peserta didik</label><input id="lkpdName" maxlength="100" placeholder="Nama lengkap"></div>
+    <div class="field"><label for="lkpdClass">Kelas</label><input id="lkpdClass" maxlength="30" placeholder="Contoh: IX-A"></div>
+    <div class="field"><label for="lkpdGroup">Nama kelompok</label><input id="lkpdGroup" maxlength="80" placeholder="Nama kelompok"></div>
+    <div class="field"><label for="lkpdDate">Tanggal pengerjaan</label><input id="lkpdDate" type="date"></div>
+  </div>
+  <div class="field"><label for="lkpdMembers">Nama anggota kelompok</label><textarea id="lkpdMembers" maxlength="500" placeholder="Tuliskan nama anggota kelompok"></textarea></div>
+  <div class="lkpd-activity">
+    <h3>Tujuan Pembelajaran</h3>
+    <ol>
+      <li>Mengidentifikasi perilaku positif dan negatif dalam interaksi digital.</li>
+      <li>Menganalisis dampak cyberbullying, hoaks, oversharing, dan penggunaan teknologi berlebihan.</li>
+      <li>Menunjukkan sikap toleransi, empati, dan tanggung jawab di dunia digital.</li>
+      <li>Menerapkan mindfulness sebelum membagikan atau menanggapi konten digital.</li>
+      <li>Menjelaskan cara melindungi data pribadi dan identitas digital.</li>
+      <li>Menyusun komitmen untuk membangun kebiasaan digital yang aman dan bijak.</li>
+    </ol>
+  </div>
+  <div class="lkpd-activity">
+    <h3>Aktivitas 1 – Identifikasi Perilaku Digital</h3>
+    <p class="muted">Tuliskan contoh situasi digital, klasifikasikan perilakunya, lalu jelaskan alasan dan tindakan yang tepat.</p>
+    <table class="lkpd-table"><thead><tr><th>Situasi/contoh perilaku digital</th><th>Positif atau negatif</th><th>Alasan</th><th>Tindakan yang seharusnya</th></tr></thead><tbody>
+      <tr><td><textarea id="lkpdA1s1" aria-label="Situasi 1"></textarea></td><td><textarea id="lkpdA1p1" aria-label="Klasifikasi 1"></textarea></td><td><textarea id="lkpdA1a1" aria-label="Alasan 1"></textarea></td><td><textarea id="lkpdA1t1" aria-label="Tindakan 1"></textarea></td></tr>
+      <tr><td><textarea id="lkpdA1s2" aria-label="Situasi 2"></textarea></td><td><textarea id="lkpdA1p2" aria-label="Klasifikasi 2"></textarea></td><td><textarea id="lkpdA1a2" aria-label="Alasan 2"></textarea></td><td><textarea id="lkpdA1t2" aria-label="Tindakan 2"></textarea></td></tr>
+      <tr><td><textarea id="lkpdA1s3" aria-label="Situasi 3"></textarea></td><td><textarea id="lkpdA1p3" aria-label="Klasifikasi 3"></textarea></td><td><textarea id="lkpdA1a3" aria-label="Alasan 3"></textarea></td><td><textarea id="lkpdA1t3" aria-label="Tindakan 3"></textarea></td></tr>
+    </tbody></table>
+  </div>
+  <div class="lkpd-activity">
+    <h3>Aktivitas 2 – Analisis Kasus</h3>
+    <div class="lkpd-question"><b>Kasus A: Cyberbullying di grup kelas</b><p>Seorang peserta didik terus-menerus diejek di grup kelas. Analisis masalah, dampaknya, dan tindakan yang bertanggung jawab.</p><label for="lkpdA2a">Jawaban</label><textarea id="lkpdA2a" placeholder="Masalah, dampak, dan solusi..."></textarea></div>
+    <div class="lkpd-question"><b>Kasus B: Berita yang belum terverifikasi</b><p>Kamu menerima berita mengejutkan tanpa sumber yang jelas. Apa yang perlu diperiksa sebelum membagikannya?</p><label for="lkpdA2b">Jawaban</label><textarea id="lkpdA2b" placeholder="Langkah pemeriksaan fakta..."></textarea></div>
+    <div class="lkpd-question"><b>Kasus C: Data pribadi di media sosial</b><p>Seorang teman mengunggah foto kartu identitas dan alamat rumah secara publik. Apa risikonya dan bagaimana mencegahnya?</p><label for="lkpdA2c">Jawaban</label><textarea id="lkpdA2c" placeholder="Risiko dan langkah perlindungan..."></textarea></div>
+  </div>
+  <div class="lkpd-activity">
+    <h3>Aktivitas 3 – Empati dan Mindfulness Digital</h3>
+    <div class="lkpd-question"><label for="lkpdA3a">1. Apa yang akan kamu lakukan ketika melihat teman menjadi sasaran ejekan daring?</label><textarea id="lkpdA3a"></textarea></div>
+    <div class="lkpd-question"><label for="lkpdA3b">2. Bagaimana kamu merespons ketika menerima komentar yang membuat marah?</label><textarea id="lkpdA3b"></textarea></div>
+    <div class="lkpd-question"><label for="lkpdA3c">3. Apa yang perlu dipertimbangkan sebelum mengunggah foto atau video teman?</label><textarea id="lkpdA3c"></textarea></div>
+  </div>
+  <div class="lkpd-activity">
+    <h3>Aktivitas 4 – Perlindungan Data Pribadi</h3>
+    <p class="muted">Jangan tuliskan kata sandi, kode OTP, atau data rahasia milikmu. Analisis contoh situasi berikut.</p>
+    <table class="lkpd-table"><thead><tr><th>Informasi/situasi</th><th>Risiko yang mungkin terjadi</th><th>Langkah perlindungan</th></tr></thead><tbody>
+      <tr><td>Kata sandi dan kode OTP</td><td><textarea id="lkpdA4r1" aria-label="Risiko kata sandi dan OTP"></textarea></td><td><textarea id="lkpdA4p1" aria-label="Perlindungan kata sandi dan OTP"></textarea></td></tr>
+      <tr><td>Alamat rumah dan rutinitas harian</td><td><textarea id="lkpdA4r2" aria-label="Risiko alamat rumah"></textarea></td><td><textarea id="lkpdA4p2" aria-label="Perlindungan alamat rumah"></textarea></td></tr>
+      <tr><td>Tautan hadiah yang mencurigakan</td><td><textarea id="lkpdA4r3" aria-label="Risiko tautan mencurigakan"></textarea></td><td><textarea id="lkpdA4p3" aria-label="Perlindungan tautan mencurigakan"></textarea></td></tr>
+      <tr><td>Informasi akun dan profil publik</td><td><textarea id="lkpdA4r4" aria-label="Risiko informasi akun"></textarea></td><td><textarea id="lkpdA4p4" aria-label="Perlindungan informasi akun"></textarea></td></tr>
+    </tbody></table>
+  </div>
+  <div class="lkpd-activity">
+    <h3>Aktivitas 5 – Refleksi dan Komitmen Digital</h3>
+    <div class="lkpd-question"><label for="lkpdA5a">1. Apa hal baru yang saya pelajari?</label><textarea id="lkpdA5a"></textarea></div>
+    <div class="lkpd-question"><label for="lkpdA5b">2. Kebiasaan digital apa yang perlu saya perbaiki?</label><textarea id="lkpdA5b"></textarea></div>
+    <div class="lkpd-question"><label for="lkpdA5c">3. Bagaimana cara saya menunjukkan empati di dunia digital?</label><textarea id="lkpdA5c"></textarea></div>
+    <div class="lkpd-question"><label for="lkpdA5d">4. Tuliskan tiga tindakan nyata untuk menjaga keamanan digital.</label><textarea id="lkpdA5d"></textarea></div>
+  </div>
+  <div id="lkpdStatus" class="status hidden no-print" role="status" aria-live="polite"></div>
+  <div class="lkpd-actions no-print">
+    <button class="greenbtn" id="lkpdSaveBtn">💾 Simpan Jawaban</button>
+    <button class="primary" id="lkpdSendBtn">☁️ Kirim LKPD ke Google Sheets</button>
+    <button class="secondary" id="lkpdLoadBtn">↻ Muat Kembali Jawaban</button>
+    <button class="danger" id="lkpdClearBtn">Kosongkan LKPD</button>
+    <button class="primary" id="lkpdPrintBtn">🖨️ Cetak / Simpan PDF</button>
+    <button class="secondary" id="lkpdHomeBtn">← Kembali ke Beranda</button>
+  </div>
+</section>
+
+<section id="screen-level" class="screen card">
+  <div class="topline"><span class="pill" id="levelPill">LEVEL 1</span><span class="muted small" id="qCounter">Soal 1 dari 3</span></div>
+  <h2 class="section-title" id="levelTitle">Detektif Perilaku Digital</h2>
+  <p class="muted" id="levelDesc"></p>
+  <div class="progress"><div id="levelBar"></div></div>
+  <div id="questionHost"></div>
+  <div class="actions">
+    <button class="secondary" id="prevBtn">← Sebelumnya</button>
+    <div class="right"><button class="secondary" id="checkBtn">Periksa Jawaban</button><button class="primary" id="nextBtn">Soal Berikutnya →</button></div>
+  </div>
+</section>
+
+<section id="screen-results" class="screen card">
+  <span class="pill">🏆 Evaluasi Akhir</span>
+  <h2 class="section-title">Laporan Misi Tim</h2>
+  <p class="muted">Tinjau hasil kelompok, lalu isi refleksi dan kirim rekap ke Google Sheets bila sudah dikonfigurasi.</p>
+  <div class="badgebox"><div class="badgeicon" id="resultIcon">🛡️</div><div><h3 id="resultRank" style="margin:0 0 4px">Guardian Pemula</h3><div id="resultMessage">Selesaikan misi untuk melihat hasil.</div></div></div>
+  <div class="resultgrid" style="margin-top:14px">
+    <div class="result"><span class="muted small">Skor</span><strong id="finalScore">0/180</strong></div>
+    <div class="result"><span class="muted small">Akurasi</span><strong id="accuracy">0%</strong></div>
+    <div class="result"><span class="muted small">Level selesai</span><strong id="finishedLevels">0/6</strong></div>
+  </div>
+  <h3>Skor per misi</h3><div id="levelResults"></div>
+  <h3>🌱 Refleksi dan komitmen kelompok</h3>
+  <div class="field"><label for="reflection1">Kebiasaan digital apa yang perlu kami perbaiki?</label><textarea id="reflection1" maxlength="1000" placeholder="Tuliskan hasil diskusi kelompok..."></textarea></div>
+  <div class="field"><label for="reflection2">Langkah nyata apa yang akan kami lakukan mulai hari ini?</label><textarea id="reflection2" maxlength="1000" placeholder="Contoh: memeriksa sumber berita sebelum membagikannya..."></textarea></div>
+  <div class="field"><label for="reflection3">Bagaimana kelompok akan saling mengingatkan dengan empati?</label><textarea id="reflection3" maxlength="1000" placeholder="Tuliskan kesepakatan tim..."></textarea></div>
+  <div class="actions"><button class="secondary" id="reviewBtn">← Tinjau Misi</button><div class="right"><button class="greenbtn" id="saveBtn">☁️ Kirim Hasil ke Google Sheets</button><button class="primary" id="printBtn">Cetak / Simpan PDF</button></div></div>
+  <div id="saveStatus" class="status hidden" role="status" aria-live="polite"></div>
+</section>
+
+<section id="screen-settings" class="screen card">
+  <span class="pill">⚙️ Pengaturan Guru</span>
+  <h2 class="section-title">Hubungkan Google Sheets</h2>
+  <p>Game HTML tidak dapat membuat spreadsheet secara otomatis di akun guru. Buat Google Sheet dan pasang Apps Script sesuai panduan yang disertakan, lalu tempel URL Web App di bawah ini.</p>
+  <div class="field"><label for="endpoint">URL Web App Google Apps Script</label><input id="endpoint" type="url" placeholder="https://script.google.com/macros/s/.../exec"></div>
+  <div class="field"><label for="teacherCode">Kode kelas (opsional)</label><input id="teacherCode" maxlength="80" placeholder="Contoh: INFORMATIKA-IX-2026"></div>
+  <label class="checkline"><input type="checkbox" id="consentCheck"><span>Saya memahami data yang dikirim berupa nama kelompok, kelas, skor, jawaban, dan refleksi. Saya sudah memberi tahu peserta didik sesuai kebijakan sekolah.</span></label>
+  <div class="actions"><button class="secondary" id="testBtn">Simpan Pengaturan</button><button class="primary" id="sendTestBtn">Kirim Tes Koneksi</button></div>
+  <div id="settingsStatus" class="status hidden" role="status" aria-live="polite"></div>
+  <hr style="border:0;border-top:1px solid var(--line);margin:22px 0">
+  <h3>Privasi dan penyimpanan</h3>
+  <ul><li>Progres permainan disimpan di browser perangkat ini.</li><li>Google Sheets hanya menerima data setelah tombol kirim ditekan.</li><li>Jangan meminta siswa memasukkan informasi sensitif.</li><li>Jika menggunakan komputer bersama, hapus progres lokal setelah kegiatan selesai.</li></ul>
+  <button class="danger" id="resetBtn">Reset seluruh progres di perangkat ini</button>
+</section>
+</main>
+</div>
+<div class="footer">“Jaga jejak digitalmu, lindungi data pribadimu, dan jadilah warga digital yang bijak!”<br>Digital Guardian • Media pembelajaran Informatika Kelas IX</div>
+</div>
+<script>
+const levels=[
+{title:"Identifikasi Perilaku Digital",desc:"Misi 1 — bedakan perilaku positif dan negatif ketika berinteraksi di dunia digital.",goal:"Mengidentifikasi perilaku positif dan negatif dalam berinteraksi di dunia digital",questions:[
+{q:"Kamu melihat teman mengunggah karya digital. Tindakan mana yang menunjukkan perilaku positif?",a:["Memberi apresiasi yang sopan dan membangun","Mengejek hasil karyanya agar ramai","Mengunggah ulang karya tanpa izin"],c:0,e:"Apresiasi yang sopan menunjukkan penghargaan. Mintalah izin sebelum menyebarkan karya orang lain."},
+{q:"Seseorang berbeda pendapat denganmu di forum kelas. Apa respons yang tepat?",a:["Menyerang pribadinya","Menyampaikan alasan dengan sopan dan menghargai perbedaan","Mengajak teman lain mengejeknya"],c:1,e:"Perbedaan pendapat dapat dibahas dengan santun. Tanggapi gagasannya, bukan menyerang orangnya."},
+{q:"Manakah contoh perilaku digital negatif?",a:["Membagikan sumber belajar tepercaya","Melaporkan konten berbahaya","Menyebarkan tangkapan layar percakapan pribadi untuk mempermalukan teman"],c:2,e:"Menyebarkan percakapan pribadi tanpa izin dapat merusak kepercayaan dan melanggar privasi."}]},
+{title:"Menganalisis Dampak Perilaku Digital",desc:"Misi 2 — pahami dampak cyberbullying, kecanduan digital, hoaks, dan perilaku berisiko lainnya.",goal:"Menjelaskan dampak perilaku digital, seperti cyberbullying, oversharing, kecanduan digital, dan penyebaran hoaks",questions:[
+{q:"Teman terus-menerus dihina dalam grup kelas. Apa dampak yang mungkin dialaminya?",a:["Selalu merasa lebih percaya diri","Tidak mungkin terpengaruh karena terjadi secara daring","Merasa takut, tertekan, atau tidak aman akibat cyberbullying"],c:2,e:"Cyberbullying dapat mengganggu rasa aman, hubungan sosial, dan kesehatan mental. Dukung korban dan laporkan melalui jalur aman."},
+{q:"Seseorang bermain gim sampai larut malam setiap hari dan mulai terlambat sekolah. Ini merupakan contoh...",a:["Kebiasaan digital seimbang","Penggunaan digital berlebihan yang dapat mengganggu tidur dan tanggung jawab","Bukti bahwa semua gim berbahaya"],c:1,e:"Penggunaan berlebihan dapat mengganggu tidur, konsentrasi, belajar, dan aktivitas lain. Buat batas waktu yang realistis."},
+{q:"Kamu menerima kabar mengejutkan tanpa sumber yang jelas. Jika langsung membagikannya, risiko utamanya adalah...",a:["Hoaks dapat menyebar dan merugikan orang lain","Kabar itu otomatis menjadi benar","Semua orang pasti memeriksa faktanya"],c:0,e:"Periksa sumber, tanggal, bukti, dan konfirmasi dari sumber tepercaya sebelum membagikan informasi."}]},
+{title:"Toleransi, Empati, dan Tanggung Jawab",desc:"Misi 3 — pilih respons yang menghargai orang lain dan bertanggung jawab atas tindakan digital.",goal:"Menganalisis perilaku digital berdasarkan prinsip toleransi, empati, dan tanggung jawab",questions:[
+{q:"Kamu melihat teman menjadi sasaran ejekan daring. Apa respons paling bertanggung jawab?",a:["Ikut menertawakan agar diterima kelompok","Menyebarkan tangkapan layar sebagai hiburan","Tidak ikut menyebarkan, mendukung korban, dan melapor melalui jalur aman"],c:2,e:"Jangan memperkuat perundungan. Berikan dukungan kepada korban dan mintalah bantuan guru atau orang dewasa tepercaya."},
+{q:"Teman menyampaikan pendapat yang berbeda. Sikap toleran adalah...",a:["Memaksa semua orang setuju","Mendengarkan dan menanggapi dengan sopan tanpa merendahkan","Mengeluarkannya dari grup"],c:1,e:"Toleransi bukan berarti harus selalu setuju, melainkan menghargai hak orang lain untuk berbeda."},
+{q:"Kamu sadar telah membagikan informasi yang keliru. Apa tindakan bertanggung jawab?",a:["Mengoreksi unggahan dan memberi klarifikasi","Berpura-pura tidak tahu","Menyalahkan orang yang mengoreksi"],c:0,e:"Akui kesalahan, perbaiki informasi, dan beri tahu penerima jika informasi keliru sudah tersebar."}]},
+{title:"Mindfulness Sebelum Bertindak",desc:"Misi 4 — berhenti sejenak, sadari emosi, periksa informasi, lalu pilih tindakan.",goal:"Menerapkan prinsip mindfulness sebelum membuat, membagikan, atau menanggapi konten digital",questions:[
+{q:"Kamu marah membaca komentar di media sosial. Apa langkah mindful yang tepat?",a:["Langsung membalas dengan hinaan","Berhenti sejenak, mengenali emosi, lalu memilih respons yang aman","Menyebarkan data pribadi penulis komentar"],c:1,e:"Jeda membantu kita menyadari emosi dan menghindari respons impulsif yang memperburuk keadaan."},
+{q:"Sebelum membagikan video viral, apa yang sebaiknya dilakukan?",a:["Memeriksa sumber, konteks, tanggal, dan dampaknya","Membagikan secepatnya agar menjadi yang pertama","Memercayainya karena banyak yang membagikan"],c:0,e:"Popularitas bukan bukti kebenaran. Periksa fakta dan pertimbangkan apakah konten melanggar privasi atau merugikan."},
+{q:"Sebelum mengunggah foto teman, tindakan yang paling bijak adalah...",a:["Mengunggahnya tanpa berpikir","Menandai semua orang agar cepat viral","Meminta izin dan mempertimbangkan perasaan serta privasi teman"],c:2,e:"Mindfulness berarti mempertimbangkan niat, dampak, dan hak orang lain sebelum membuat atau membagikan konten."}]},
+{title:"Melindungi Data Pribadi dan Identitas Digital",desc:"Misi 5 — kenali data sensitif, atur privasi, dan hindari penipuan digital.",goal:"Menentukan langkah-langkah untuk melindungi data pribadi dan identitas digital",questions:[
+{q:"Orang tak dikenal meminta kode OTP dengan alasan verifikasi. Apa yang harus dilakukan?",a:["Memberikan kode agar proses cepat","Menolak membagikan OTP dan memeriksa akun lewat aplikasi resmi","Mengirim kode jika orang itu memakai foto petugas"],c:1,e:"OTP, kata sandi, dan kode pemulihan adalah rahasia. Jangan bagikan kepada siapa pun."},
+{q:"Manakah tindakan yang membantu mengurangi risiko oversharing?",a:["Mengunggah alamat rumah dan jadwal harian secara publik","Membagikan foto kartu identitas agar mudah dikenali","Membatasi informasi profil dan memeriksa pengaturan privasi"],c:2,e:"Informasi yang tampak sepele dapat digabungkan untuk menebak rutinitas atau lokasi. Bagikan informasi seperlunya."},
+{q:"Kamu menerima tautan hadiah yang meminta kata sandi akun. Tindakan terbaik adalah...",a:["Tidak memasukkan data, memeriksa lewat kanal resmi, dan melaporkan tautan mencurigakan","Memasukkan kata sandi untuk mengecek hadiah","Meneruskan tautan ke semua teman"],c:0,e:"Tautan itu bisa berupa phishing. Jangan masukkan kredensial melalui tautan yang mencurigakan; buka situs resmi secara mandiri."}]},
+{title:"Evaluasi Diri dan Komitmen Digital",desc:"Misi 6 — evaluasi kebiasaan teknologi dan buat rencana perubahan yang konkret.",goal:"Mengevaluasi perilaku diri sendiri dalam menggunakan teknologi digital serta merumuskan tindakan untuk membangun kebiasaan digital yang aman dan bijak",questions:[
+{q:"Kamu sering menggunakan ponsel hingga larut malam. Langkah awal yang realistis adalah...",a:["Mengabaikan dampaknya","Menetapkan waktu berhenti, menjauhkan perangkat saat tidur, lalu mengevaluasi kebiasaan","Mengurangi waktu tidur agar bisa bermain lebih lama"],c:1,e:"Mulailah dengan target sederhana, seperti waktu berhenti dan pengaturan notifikasi. Tinjau perubahan secara berkala."},
+{q:"Cara yang tepat untuk mengevaluasi kebiasaan digital adalah...",a:["Mengenali pola penggunaan, manfaat, risiko, lalu memilih satu perubahan konkret","Membandingkan diri dengan semua orang di internet","Menganggap semua penggunaan teknologi itu buruk"],c:0,e:"Evaluasi diri berfokus pada pola dan dampak penggunaan, bukan menyalahkan diri sendiri."},
+{q:"Kelompok ingin membuat komitmen menjadi warga digital yang aman. Pilihan terbaik adalah...",a:["Membuat janji umum tanpa tindakan","Meminta semua anggota bertukar kata sandi","Menyepakati tindakan terukur, seperti memeriksa sumber sebelum berbagi dan saling mengingatkan dengan sopan"],c:2,e:"Komitmen yang spesifik dan dapat dilakukan lebih mudah diterapkan. Saling mengingatkan tidak boleh melanggar privasi."}]}
+];
+const $=id=>document.getElementById(id);
+let currentLevel=0,currentQ=0,answers={},checked={},done={},scoreByLevel=Array(6).fill(0),started=false;
+const storeKey="digitalGuardianIX_v1",configKey="digitalGuardianIX_config";
+function showScreen(name){document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("active",s.id==="screen-"+name));document.querySelectorAll("#levelNav button").forEach(b=>b.classList.toggle("active",b.dataset.screen===name||(name==="level"&&Number(b.dataset.level)===currentLevel)));if(name==="results")renderResults();updateStats();window.scrollTo({top:0,behavior:"smooth"});}
+function totalScore(){return scoreByLevel.reduce((a,b)=>a+b,0)}
+function totalAnswered(){return Object.keys(answers).length}
+function updateStats(){ $("sideScore").textContent=totalScore();$("sideDone").textContent=Object.keys(done).length+"/6";$("overallBar").style.width=(Object.keys(done).length/6*100)+"%";document.querySelectorAll("[data-level]").forEach(b=>{const i=Number(b.dataset.level);b.classList.toggle("done",!!done[i]);b.innerHTML=`${["🔎","💥","💗","🧘","🔐","🌱"][i]} Level ${i+1}<small>${levels[i].title}${done[i]?" · ✓":""}</small>`})}
+function begin(){const team=$("teamName").value.trim(),cls=$("className").value.trim();if(!team||!cls){alert("Isi nama kelompok dan kelas terlebih dahulu.");return}started=true;saveLocal();openLevel(0)}
+function openLevel(i){currentLevel=i;currentQ=0;showScreen("level");renderQuestion()}
+function renderQuestion(){const l=levels[currentLevel],q=l.questions[currentQ],key=currentLevel+"-"+currentQ,selected=answers[key];$("levelPill").textContent="LEVEL "+(currentLevel+1)+" / 6";$("levelTitle").textContent=l.title;$("levelDesc").textContent=l.desc;$("qCounter").textContent=`Soal ${currentQ+1} dari ${l.questions.length}`;$("levelBar").style.width=((currentQ+1)/l.questions.length*100)+"%";
+let html=`<div class="question"><div class="qmeta">TUJUAN: ${l.goal}</div><div class="qtext">${currentQ+1}. ${q.q}</div><div class="answers">`;
+q.a.forEach((a,i)=>{let cls="answer"+(selected===i?" selected":"");if(checked[key])cls+=" "+(i===q.c?"correct":selected===i?"wrong":"");html+=`<button class="${cls}" data-answer="${i}" ${checked[key]?"disabled":""}><span class="letter">${String.fromCharCode(65+i)}</span><span>${a}</span></button>`});
+html+="</div>";
+if(checked[key])html+=`<div class="feedback ${selected===q.c?"good":"bad"}"><b>${selected===q.c?"✅ Tepat!":"💡 Mari pelajari kembali."}</b><br>${q.e}<br><span class="small">Jawaban benar: ${String.fromCharCode(65+q.c)}. ${q.a[q.c]}</span></div>`;
+html+="</div>";$("questionHost").innerHTML=html;
+document.querySelectorAll("[data-answer]").forEach(b=>b.addEventListener("click",()=>{const k=currentLevel+"-"+currentQ;if(checked[k])return;answers[k]=Number(b.dataset.answer);saveLocal();renderQuestion()}));
+$("prevBtn").disabled=currentQ===0;$("nextBtn").textContent=currentQ===l.questions.length-1?(currentLevel===5?"Selesaikan →":"Level Berikutnya →"):"Soal Berikutnya →";$("checkBtn").disabled=!!checked[key];$("checkBtn").textContent=checked[key]?"Sudah Diperiksa":"Periksa Jawaban";updateStats()}
+function checkAnswer(){const key=currentLevel+"-"+currentQ;if(answers[key]===undefined){alert("Pilih salah satu jawaban terlebih dahulu.");return}if(checked[key])return;checked[key]=true;const q=levels[currentLevel].questions[currentQ];if(answers[key]===q.c)scoreByLevel[currentLevel]+=10;if(levels[currentLevel].questions.every((_,i)=>checked[currentLevel+"-"+i]))done[currentLevel]=true;saveLocal();renderQuestion()}
+function next(){const l=levels[currentLevel];if(!checked[currentLevel+"-"+currentQ]){alert("Periksa jawaban sebelum melanjutkan agar pembahasan muncul.");return}if(currentQ<l.questions.length-1){currentQ++;renderQuestion()}else{done[currentLevel]=true;saveLocal();if(currentLevel<5){if(confirm("Level selesai! Lanjut ke level berikutnya?"))openLevel(currentLevel+1);else showScreen("intro")}else showScreen("results")}}
+function previous(){if(currentQ>0){currentQ--;renderQuestion()}else if(currentLevel>0){if(confirm("Kembali ke level sebelumnya?"))openLevel(currentLevel-1)}else showScreen("intro")}
+function renderResults(){const score=totalScore(),max=180,answered=totalAnswered(),correct=score/10;$("finalScore").textContent=score+"/"+max;$("accuracy").textContent=Math.round(correct/18*100)+"%";$("finishedLevels").textContent=Object.keys(done).length+"/6";let rank=score>=160?["🌟","Guardian Teladan","Hebat! Tim menunjukkan pemahaman yang sangat kuat."]:score>=120?["🛡️","Guardian Andal","Bagus! Terus praktikkan kebiasaan digital yang aman."]:score>=70?["🌱","Guardian Bertumbuh","Kalian sedang berkembang. Tinjau pembahasan dan coba lagi."]:["💡","Guardian Pemula","Jadikan setiap pembahasan sebagai kesempatan belajar."];$("resultIcon").textContent=rank[0];$("resultRank").textContent=rank[1];$("resultMessage").textContent=rank[2];$("levelResults").innerHTML=levels.map((l,i)=>`<div class="result" style="margin:8px 0"><div style="display:flex;justify-content:space-between;gap:10px"><b>${i+1}. ${l.title}</b><strong>${scoreByLevel[i]}/30</strong></div><div class="progress"><div style="width:${scoreByLevel[i]/30*100}%"></div></div><span class="small muted">${done[i]?"Level selesai":"Belum semua soal diperiksa"}</span></div>`).join("")}
+function saveLocal(){const data={currentLevel,currentQ,answers,checked,done,scoreByLevel,started,teamName:$("teamName").value,className:$("className").value,members:$("members").value,reflection1:$("reflection1").value,reflection2:$("reflection2").value,reflection3:$("reflection3").value};try{localStorage.setItem(storeKey,JSON.stringify(data))}catch(e){}updateStats()}
+const lkpdStoreKey="digitalGuardianIX_lkpd_v1";
+function lkpdFields(){return Array.from(document.querySelectorAll('#screen-lkpd input, #screen-lkpd textarea')).filter(el=>el.id);}
+function saveLKPD(showMessage=true){const data={};lkpdFields().forEach(el=>data[el.id]=el.value);try{localStorage.setItem(lkpdStoreKey,JSON.stringify(data));if(showMessage){const st=$("lkpdStatus");st.className="status ok no-print";st.textContent="Jawaban LKPD berhasil disimpan di browser perangkat ini.";st.classList.remove("hidden");}}catch(e){const st=$("lkpdStatus");st.className="status err no-print";st.textContent="Penyimpanan gagal. Periksa ruang penyimpanan browser.";st.classList.remove("hidden");}}
+function loadLKPD(showMessage=true){try{const data=JSON.parse(localStorage.getItem(lkpdStoreKey)||"null");if(!data){if(showMessage){const st=$("lkpdStatus");st.className="status no-print";st.textContent="Belum ada jawaban LKPD tersimpan di browser ini.";st.classList.remove("hidden");}return;}lkpdFields().forEach(el=>{if(Object.prototype.hasOwnProperty.call(data,el.id))el.value=data[el.id]||"";});if(showMessage){const st=$("lkpdStatus");st.className="status ok no-print";st.textContent="Jawaban LKPD yang tersimpan berhasil dimuat kembali.";st.classList.remove("hidden");}}catch(e){const st=$("lkpdStatus");st.className="status err no-print";st.textContent="Jawaban LKPD tidak dapat dimuat.";st.classList.remove("hidden");}}
+function clearLKPD(){if(!confirm("Kosongkan semua jawaban dan identitas pada LKPD? Tindakan ini tidak dapat dibatalkan."))return;localStorage.removeItem(lkpdStoreKey);lkpdFields().forEach(el=>el.value="");const st=$("lkpdStatus");st.className="status no-print";st.textContent="Semua kolom LKPD telah dikosongkan.";st.classList.remove("hidden");}
+function collectLKPD(){const fields={};lkpdFields().forEach(el=>fields[el.id]=el.value.trim());return {event:"lkpd_submission",timestamp:new Date().toISOString(),teacherCode:config().teacherCode,studentName:$("lkpdName").value.trim(),className:$("lkpdClass").value.trim(),groupName:$("lkpdGroup").value.trim(),workDate:$("lkpdDate").value,members:$("lkpdMembers").value.trim(),answers:fields};}
+async function sendLKPDToSheets(){const c=config(),st=$("lkpdStatus");st.className="status no-print";st.textContent="Mengirim jawaban LKPD ke Google Sheets…";st.classList.remove("hidden");if(!c.endpoint||!c.endpoint.startsWith("https://script.google.com/")){st.classList.add("err");st.textContent="URL Web App belum diatur. Buka menu Pengaturan, masukkan URL Apps Script, lalu simpan.";return;}if(!c.consent){st.classList.add("err");st.textContent="Buka menu Pengaturan dan centang persetujuan pengiriman data terlebih dahulu.";return;}if(!$("lkpdName").value.trim()||!$("lkpdClass").value.trim()){st.classList.add("err");st.textContent="Isi nama peserta didik dan kelas sebelum mengirim LKPD.";return;}saveConfig();saveLKPD(false);try{await fetch(c.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(collectLKPD()),redirect:"follow"});st.className="status ok no-print";st.textContent="Permintaan pengiriman LKPD sudah dikirim. Karena koneksi no-cors tidak dapat membaca balasan server, periksa tab LKPD di Google Sheets untuk memastikan data masuk.";st.classList.remove("hidden");}catch(err){st.className="status err no-print";st.textContent="Pengiriman gagal: "+err.message+". Periksa koneksi internet dan URL Web App.";st.classList.remove("hidden");}}
+function restore(){try{const d=JSON.parse(localStorage.getItem(storeKey)||"null");if(d){currentLevel=d.currentLevel||0;currentQ=d.currentQ||0;answers=d.answers||{};checked=d.checked||{};done=d.done||{};scoreByLevel=d.scoreByLevel||Array(6).fill(0);started=!!d.started;$("teamName").value=d.teamName||"";$("className").value=d.className||"";$("members").value=d.members||"";$("reflection1").value=d.reflection1||"";$("reflection2").value=d.reflection2||"";$("reflection3").value=d.reflection3||""}}catch(e){}try{const c=JSON.parse(localStorage.getItem(configKey)||"{}");$("endpoint").value=c.endpoint||"";$("teacherCode").value=c.teacherCode||"";$("consentCheck").checked=!!c.consent}catch(e){}updateStats()}
+function config(){return {endpoint:$("endpoint").value.trim(),teacherCode:$("teacherCode").value.trim(),consent:$("consentCheck").checked}}
+function saveConfig(){localStorage.setItem(configKey,JSON.stringify(config()));$("settingsStatus").className="status ok";$("settingsStatus").textContent="Pengaturan disimpan di browser ini.";$("settingsStatus").classList.remove("hidden")}
+function payload(test=false){return {event:test?"connection_test":"game_result",timestamp:new Date().toISOString(),teacherCode:config().teacherCode,teamName:$("teamName").value.trim(),className:$("className").value.trim(),members:$("members").value.trim(),score:totalScore(),maxScore:180,accuracy:Math.round(totalScore()/180*100),levelsCompleted:Object.keys(done).length,levelScores:scoreByLevel,answers:answers,reflections:{improve:$("reflection1").value.trim(),action:$("reflection2").value.trim(),empathy:$("reflection3").value.trim()},userAgent:navigator.userAgent}}
+async function sendData(test=false){const c=config(),status=test?$("settingsStatus"):$("saveStatus");status.className="status";status.textContent="Mengirim data…";status.classList.remove("hidden");if(!c.endpoint||!c.endpoint.startsWith("https://script.google.com/")){status.classList.add("err");status.textContent="Masukkan URL Web App Google Apps Script yang valid (berawalan https://script.google.com/).";return}if(!c.consent){status.classList.add("err");status.textContent="Centang konfirmasi privasi terlebih dahulu pada Pengaturan.";return}if(!test&&(!$("teamName").value.trim()||!$("className").value.trim())){status.classList.add("err");status.textContent="Isi nama kelompok dan kelas pada Beranda terlebih dahulu.";return}saveConfig();const data=payload(test);try{
+ // no-cors is used because Apps Script Web Apps may not expose CORS headers to a local HTML file.
+ // The browser can send the request, but cannot read the response in no-cors mode.
+ await fetch(c.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data),redirect:"follow"});
+ status.className="status ok";status.textContent="Permintaan pengiriman sudah dikirim oleh browser. Mode no-cors tidak memungkinkan game membaca konfirmasi server; periksa tab Google Sheets untuk memastikan baris masuk. Jika belum muncul, cek deployment Apps Script dan akses Web App.";
+ }catch(err){status.className="status err";status.textContent="Pengiriman gagal dari browser: "+err.message+". Periksa koneksi internet, URL deployment, dan izin akses Web App."}}
+function resetAll(){if(!confirm("Hapus progres, jawaban, skor, refleksi, dan identitas kelompok dari browser ini? Tindakan ini tidak menghapus data yang sudah terkirim ke Google Sheets."))return;localStorage.removeItem(storeKey);answers={};checked={};done={};scoreByLevel=Array(6).fill(0);currentLevel=0;currentQ=0;started=false;$("teamName").value="";$("className").value="";$("members").value="";$("reflection1").value="";$("reflection2").value="";$("reflection3").value="";showScreen("intro")}
+document.querySelectorAll("#levelNav button").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.level!==undefined){if(!started){alert("Isi nama kelompok dan kelas, lalu klik Mulai Misi.");showScreen("intro");return}openLevel(Number(b.dataset.level))}else showScreen(b.dataset.screen)}));
+$("startBtn").addEventListener("click",begin);$("checkBtn").addEventListener("click",checkAnswer);$("nextBtn").addEventListener("click",next);$("prevBtn").addEventListener("click",previous);$("reviewBtn").addEventListener("click",()=>openLevel(0));$("printBtn").addEventListener("click",()=>window.print());$("saveBtn").addEventListener("click",()=>sendData(false));$("testBtn").addEventListener("click",saveConfig);$("sendTestBtn").addEventListener("click",()=>sendData(true));$("resetBtn").addEventListener("click",resetAll);
+["teamName","className","members","reflection1","reflection2","reflection3"].forEach(id=>$(id).addEventListener("input",saveLocal));
+restore();
+loadLKPD(false);
+document.querySelectorAll('#screen-lkpd input, #screen-lkpd textarea').forEach(el=>el.addEventListener('input',()=>saveLKPD(false)));
+$("lkpdSaveBtn").addEventListener("click",()=>saveLKPD(true));
+$("lkpdSendBtn").addEventListener("click",sendLKPDToSheets);
+$("lkpdLoadBtn").addEventListener("click",()=>loadLKPD(true));
+$("lkpdClearBtn").addEventListener("click",clearLKPD);
+$("lkpdPrintBtn").addEventListener("click",()=>window.print());
+$("lkpdHomeBtn").addEventListener("click",()=>showScreen("intro"));
+</script>
+</body>
+</html>
